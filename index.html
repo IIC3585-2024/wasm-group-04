@@ -1,22 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Hello world</title>
-    </head>
-    <body>
-        <h1>Hello world!</h1>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hello world</title>
+  </head>
+  <body>
+    <h1>Pollard's rho Integer Factorization</h1>
+    <p>
+      Note that the difficulty of integer factorization depends on the given
+      number. The complexity is bigger when the factors are bigger. So for example in the table
+      given below the difficulty of the number 18446744073709551615 is lower than the number 10000454604920513 even
+      when the first is smaller. So the complexity is a function of the result of the function, not the size of the input.
+    </p>
+    <h2>Input pairs for different difficulties</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Difficulty</th>
+          <th>factors</th>
+          <th>Multiplication</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Easy</td>
+          <td>1, 2</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Easy</td>
+          <td>3,4,</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <td>Medium</td>
+          <td>3,5,17,641,257,65537,6700417</td>
+          <td>18446744073709551615</td>
+        </tr>
+        <tr>
+          <td>Hard</td>
+          <td>10739063, 10739623</td>
+          <td>115333487993249</td>
+        </tr>
+        <tr>
+          <td>Very Hard</td>
+          <td>100002769, 100001777</td>
+          <td>10000454604920513</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Factorize a number</h2>
 
-        <input id="numberInput" type="number" placeholder="Enter a number" value="1234123">
-        <select id="methodSelect">
-            <option value="wasm">wasm C</option>
-            <option value="js">js</option>
-        </select>
-        <button id="factorizeButton">Factorize</button>
-        <p id="output"></p>
-        <div id="time"></div>
+    <input
+      id="numberInput"
+      type="number"
+      placeholder="Enter a number"
+      value="18446744073709551615"
+    />
+    <select id="methodSelect">
+      <option value="wasm">wasm C</option>
+      <option value="js">js</option>
+    </select>
+    <button id="factorizeButton">Factorize</button>
+    <p id="output"></p>
+    <div id="time"></div>
 
-        <script type="module" src="src/index.js"></script>
-    </body>
+    <script type="module" src="src/index.js"></script>
+  </body>
 </html>

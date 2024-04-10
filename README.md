@@ -19,3 +19,14 @@ The wasm binaries for C code is already compiled. To recompile just run in termi
 ```bash
 ./compile.sh
 ```
+
+## Roadmap
+- [x] Implement Pollard's rho algorithm in C
+- [x] Compile C code to wasm
+- [x] Implement Pollard's rho algorithm in JS
+- [x] Implement a simple web interface
+- [x] Support for large numbers (64 bits bigint in JS equivalent to C long long unsigned int)
+- [ ] Implement a more complex web interface
+- [ ] Implement more algorithms
+- [ ] Compare different optimizations (Current is just O3)
+- [ ] Make a complete implementation of factorize function in C ¿Return array of integers or share a string buffer? need more investigation.
