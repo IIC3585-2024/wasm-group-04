@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Hello world</title>
+    <link rel="stylesheet" href="style/index.css" />
   </head>
   <body>
     <h1>Pollard's rho Integer Factorization</h1>
@@ -71,11 +72,48 @@
     <select id="methodSelect">
       <option value="js">js</option>
       <option value="wasm">wasm C</option>
-      <option value="naive">naive</option>
+      <option value="naive">naive js</option>
     </select>
     <button id="factorizeButton">Factorize</button>
     <p id="output"></p>
     <div id="time"></div>
+
+    <h2>Compare after multiple iterations</h2>
+    <input
+      id="iterationsInput"
+      type="number"
+      placeholder="Enter number of iterations"
+      value=""
+    />
+    <input
+      id="updateRateInput"
+      type="number"
+      placeholder="Update Rate"
+      value=""
+    />
+    <button id="compareButton">Compare</button>
+    <p id="loading"> </p>
+    <table id="compareTable">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>js</td>
+          <td id="js"></td>
+        </tr>
+        <tr>
+          <td>wasm</td>
+          <td id="wasm"></td>
+        </tr>
+        <tr>
+          <td>naive</td>
+          <td id="naive"></td>
+        </tr>
+      </tbody>
 
     <script type="module" src="src/index.js"></script>
   </body>
