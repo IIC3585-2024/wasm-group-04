@@ -42,6 +42,7 @@ document.getElementById('compareButton').addEventListener('click', async functio
     const wasmTimes = [];
     const jsTimes = [];
     const naiveTimes = [];
+    document.getElementById('loading').innerText = `Loading... ${0} / ${iterations}`;
     
     for (let i = 0; i < iterations; i++) {
 
