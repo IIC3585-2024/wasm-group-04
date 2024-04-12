@@ -1,0 +1,74 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, clean font */
+    color: #333; /* Keeping text readable */
+    background-color: #f4f7f6; /* Softer background for less eye strain */
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  h1, h2 {
+    color: #102A43; /* Darker, richer color for headings */
+    margin-bottom: 0.5em;
+  }
+  
+  h1 {
+    font-size: 2.25rem; /* Making main heading larger */
+  }
+  
+  h2 {
+    font-size: 1.75rem; /* Adjusting secondary heading size */
+    margin-top: 1em;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adding a subtle shadow for depth */
+  }
+  
+  th, td {
+    padding: 15px; /* More spacious padding */
+    border: 1px solid #e3e3e3; /* Lighter border */
+    text-align: left;
+  }
+  
+  th {
+    background-color: #5B7B7A; /* Accent color for headers */
+    color: #fff; /* White text for contrast */
+  }
+  
+  input, select, button {
+    font-size: 16px;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px; /* Rounded corners for a softer look */
+    border: 1px solid #ccc; /* Defined borders for inputs */
+    background: #fff; /* White background for input and select */
+  }
+  
+  button {
+    cursor: pointer;
+    background-color: #2C7A7B; /* Accent color for buttons */
+    color: #fff; /* White text on buttons */
+    border: none; /* Removing button border */
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #285E61; /* Darker shade on hover for feedback */
+  }
+  
+  #output, #time {
+    margin-top: 20px;
+    background-color: #fff; /* Background for output areas */
+    padding: 15px; /* Padding for output areas */
+    border-radius: 5px; /* Rounded corners for the output containers */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+  }
+  
