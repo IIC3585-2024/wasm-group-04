@@ -1,4 +1,5 @@
 import { factorize, cFactorize } from './factorization.js';
+import { naiveFactorization } from './naiveFactorization.js';
 
 document.getElementById('factorizeButton').addEventListener('click', async function() {
     const max64Bit = (2n ** 64n) - 1n;
@@ -20,6 +21,9 @@ document.getElementById('factorizeButton').addEventListener('click', async funct
             break;
         case 'js':
             result = await factorize(number);
+            break;
+        case 'naive':
+            result = await naiveFactorization(number);
             break;
     }
 
