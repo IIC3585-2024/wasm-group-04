@@ -9,11 +9,34 @@ const handleMethodSelection = () => {
     
     optionButtons.forEach(button => {
         button.addEventListener('click', () => {
+            // Remove the 'selected' class from all buttons
+            optionButtons.forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            // Add the 'selected' class to the clicked button
+            button.classList.add('selected');
+
             selectedMethod = button.getAttribute('data-value');
             console.log(`Selected Method: ${selectedMethod}`);
         });
     });
 }
+
+const generateRandomNumbers = () => {
+    const input = document.getElementById('numberInput');
+  
+    const interval = setInterval(() => {
+      const randomNumber = Math.floor(Math.random() * 18446744073709551615); // Generates a random number between 0 and 999
+      input.value = randomNumber;
+    }, 50); // Interval of 50 milliseconds to generate new random numbers
+    
+    // Stop generating random numbers after 1 second
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 1000);
+};
+  
 
 // Function to handle factorization
 const handleFactorization = async () => {
@@ -46,7 +69,16 @@ const handleFactorization = async () => {
     const endTime = new Date().getTime();
     const totalTime = (endTime - startTime); // convert to milliseconds
 
-    document.getElementById('output').innerText = `The factors are: ${result}`;
+    document.getElementById('output').innerHTML = '';
+
+    // Add each factor as a new <p> tag
+    result.forEach(factor => {
+        const p = document.createElement('p');
+        p.innerText = factor;
+        p.classList.add('tag-number');
+        document.getElementById('output').appendChild(p);
+    });
+    // document.getElementById('output').innerText = `The factors are: ${result}`;
     document.getElementById('time').innerText = `Total time: ${totalTime} milliseconds`;
 }
 
@@ -92,6 +124,7 @@ const handleMethodComparison = async () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    generateRandomNumbers();
     handleMethodSelection();
     document.getElementById('factorizeButton').addEventListener('click', handleFactorization);
     document.getElementById('compareButton').addEventListener('click', handleMethodComparison);

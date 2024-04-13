@@ -68,7 +68,7 @@ th {
   color: var(--white); /* White text for contrast */
 }
 
-input, select, button {
+input, select {
   font-size: 16px;
   padding: 10px;
   margin: 5px 0;
@@ -79,15 +79,19 @@ input, select, button {
 }
 
 button {
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 1rem;
   cursor: pointer;
   background-color: var(--secondary); /* Accent color for buttons */
   color: var(--white); /* White text on buttons */
+  border-radius: 2rem;
   border: none; /* Removing button border */
-  transition: background-color 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
-button:hover {
-  background-color: var(--dark-secondary); /* Darker shade on hover for feedback */
+.selected, button:hover {
+  box-shadow: 0 0 10px var(--secondary);
 }
 
 #output, #time {
@@ -137,10 +141,13 @@ button:hover {
   background: linear-gradient(25deg, var(--primary-transparent) 0%, var(--alternative-primary-transparent) 60%);
 }
 
-
 /* Widths */
-.w-40 {
-  width: 40vw;
+.w-30 {
+  width: 30vw;
+}
+
+.w-50 {
+  width: 50vw;
 }
 
 .w-80 {
@@ -160,4 +167,40 @@ button:hover {
 
 .ns {
   overflow: auto;
+}
+
+.tag-number {
+  background-color: var(--alternative-primary-transparent);
+  font-weight: bold;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  padding: 0.2rem 1rem;
+}
+
+.go-btn {
+  background-color: var(--alternative-primary);
+  color: var(--black);
+  font-weight: 700;
+}
+
+.go-btn:hover {
+  box-shadow: 0 0 10px var(--alternative-primary);
+}
+
+.number-input {
+  width: 60%;
+  padding: 1rem;
+  border-radius: 4rem;
+  background-color: var(--light-slate);
+  color: var(--black);
+  /* border: 3px solid var(--light-slate); */
+  font-size: 3rem;
+  outline: none;
+  font-weight: 700;
+  appearance: textfield;
+}
+
+.number-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }

@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="header flex-x">
-      <div class="card w-40 gradient">
+      <div class="card w-30 gradient">
         <h1><span class="var--secondary">Pollard's</span> rho <br> Integer Factorization</h1>
         <p>
           Note that the difficulty of integer factorization depends on the given
@@ -17,15 +17,15 @@
           when the first is smaller. So the complexity is a function of the result of the function, not the size of the input.
         </p>
       </div>
-      <div class="card w-40">
+      <div class="card w-50">
         <div class="flex-x">
           <input
             id="numberInput"
             type="number"
             placeholder="Enter a number"
-            value="18446744073709551615"
+            class="number-input"
           />
-          <button id="factorizeButton">Factorize</button>
+          <button id="factorizeButton" class="go-btn">go</button>
         </div>
         <div class="flex-x w-40">
           <button class="method-btn" data-value="wasm">Optimized WASM</button>
@@ -39,17 +39,8 @@
           <option value="naive">Naive js</option>
         </select> -->
         <hr/>
-        <p id="output"></p>
         <div id="time"></div>
-        <div class="flex">
-          <button>13543</button>
-          <button>2243</button>
-          <button>234</button>
-          <button>7564</button>
-          <button>1753</button>
-          <button>65421</button>
-          <button>46</button>
-          <button>32</button>
+        <div class="flex" id="output">
         </div>
       </div>
     </div>
