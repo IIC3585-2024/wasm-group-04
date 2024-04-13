@@ -7,113 +7,247 @@
     <link rel="stylesheet" href="style/index.css" />
   </head>
   <body>
-    <h1>Pollard's rho Integer Factorization</h1>
-    <p>
-      Note that the difficulty of integer factorization depends on the given
-      number. The complexity is bigger when the factors are bigger. So for example in the table
-      given below the difficulty of the number 18446744073709551615 is lower than the number 10000454604920513 even
-      when the first is smaller. So the complexity is a function of the result of the function, not the size of the input.
-    </p>
-    <h2>Input pairs for different difficulties</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Difficulty</th>
-          <th>factors</th>
-          <th>Multiplication</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Easy</td>
-          <td>1, 2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>Easy</td>
-          <td>3,4,</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <td>Medium</td>
-          <td>3,5,17,641,257,65537,6700417</td>
-          <td>18446744073709551615</td>
-        </tr>
-        <tr>
-          <td>Hard</td>
-          <td>10739063, 10739623</td>
-          <td>115333487993249</td>
-        </tr>
-        <tr>
-          <td>Very Hard</td>
-          <td>100002769, 100001777</td>
-          <td>10000454604920513</td>
-        </tr>
-        <tr>
-          <td>Insane</td>
-          <td>1000003211, 1000003793</td>
-          <td>1000007004012179323</td>
-        </tr>
-        <tr>
-          <td>God Mode</td>
-          <td>48179, 207560763820789</td>
-          <td>10000070040121793231</td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>Factorize a number</h2>
+    <div class="header flex-x">
+      <div class="card w-40 gradient">
+        <h1><span class="var--secondary">Pollard's</span> rho <br> Integer Factorization</h1>
+        <p>
+          Note that the difficulty of integer factorization depends on the given
+          number. The complexity is bigger when the factors are bigger. So for example in the table
+          given below the difficulty of the number 18446744073709551615 is lower than the number 10000454604920513 even
+          when the first is smaller. So the complexity is a function of the result of the function, not the size of the input.
+        </p>
+      </div>
+      <div class="card w-40">
+        <div class="flex-x">
+          <input
+            id="numberInput"
+            type="number"
+            placeholder="Enter a number"
+            value="18446744073709551615"
+          />
+          <button id="factorizeButton">Factorize</button>
+        </div>
+        <div class="flex-x w-40">
+          <button class="method-btn" data-value="wasm">Optimized WASM</button>
+          <!-- <button class="method-btn" data-value="js">Naive WASM</button> -->
+          <button class="method-btn" data-value="js">Optimized JS</button>
+          <button class="method-btn" data-value="naive">Naive JS</button>
+        </div>
+        <!-- <select  class="ns" id="methodSelect">
+          <option value="js">JS</option>
+          <option value="wasm">WASM C</option>
+          <option value="naive">Naive js</option>
+        </select> -->
+        <hr/>
+        <p id="output"></p>
+        <div id="time"></div>
+        <div class="flex">
+          <button>13543</button>
+          <button>2243</button>
+          <button>234</button>
+          <button>7564</button>
+          <button>1753</button>
+          <button>65421</button>
+          <button>46</button>
+          <button>32</button>
+        </div>
+      </div>
+    </div>
 
-    <input
-      id="numberInput"
-      type="number"
-      placeholder="Enter a number"
-      value="18446744073709551615"
-    />
-    <select id="methodSelect">
-      <option value="js">js</option>
-      <option value="wasm">wasm C</option>
-      <option value="naive">naive js</option>
-    </select>
-    <button id="factorizeButton">Factorize</button>
-    <p id="output"></p>
-    <div id="time"></div>
+    <hr/>
 
-    <h2>Compare after multiple iterations</h2>
-    <input
-      id="iterationsInput"
-      type="number"
-      placeholder="Enter number of iterations"
-      value=""
-    />
-    <input
-      id="updateRateInput"
-      type="number"
-      placeholder="Update Rate"
-      value=""
-    />
-    <button id="compareButton">Compare</button>
-    <p id="loading"> </p>
-    <table id="compareTable">
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>js</td>
-          <td id="js"></td>
-        </tr>
-        <tr>
-          <td>wasm</td>
-          <td id="wasm"></td>
-        </tr>
-        <tr>
-          <td>naive</td>
-          <td id="naive"></td>
-        </tr>
-      </tbody>
+    <div class="flex-y">
+      <h2>Input pairs for different difficulties</h2>
+
+      <div class="card w-80 border">
+        <div class="flex-x">
+          <p>Easy</p>
+          <div class="flex-y">
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>1</p>
+            </div>
+            <hr width="500px"/>
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>     1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 border">
+        <div class="flex-x">
+          <p>Medium</p>
+          <div class="flex-y">
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>1</p>
+            </div>
+            <hr width="500px"/>
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>     1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card w-80 border">
+        <div class="flex-x">
+          <p>Hard</p>
+          <div class="flex-y">
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>1</p>
+            </div>
+            <hr width="500px"/>
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>     1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 border">
+        <div class="flex-x">
+          <p>Very Hard</p>
+          <div class="flex-y">
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>1</p>
+            </div>
+            <hr width="500px"/>
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>     1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 border">
+        <div class="flex-x">
+          <p>Insane</p>
+          <div class="flex-y">
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>1</p>
+            </div>
+            <hr width="500px"/>
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>     1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 border">
+        <div class="flex-x">
+          <p>God mode</p>
+          <div class="flex-y">
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>1</p>
+            </div>
+            <hr width="500px"/>
+            <div class="flex-x">
+              <h2>XXXXX</h2><p>     1</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      
+      <!-- <table>
+        <thead>
+          <tr>
+            <th>Difficulty</th>
+            <th>factors</th>
+            <th>Multiplication</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Easy</td>
+            <td>1, 2</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Easy</td>
+            <td>3,4,</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>Medium</td>
+            <td>3,5,17,641,257,65537,6700417</td>
+            <td>18446744073709551615</td>
+          </tr>
+          <tr>
+            <td>Hard</td>
+            <td>10739063, 10739623</td>
+            <td>115333487993249</td>
+          </tr>
+          <tr>
+            <td>Very Hard</td>
+            <td>100002769, 100001777</td>
+            <td>10000454604920513</td>
+          </tr>
+          <tr>
+            <td>Insane</td>
+            <td>1000003211, 1000003793</td>
+            <td>1000007004012179323</td>
+          </tr>
+          <tr>
+            <td>God Mode</td>
+            <td>48179, 207560763820789</td>
+            <td>10000070040121793231</td>
+          </tr>
+        </tbody>
+      </table> -->
+    
+
+      <h2>Compare after multiple iterations</h2>
+      <div class="flex-x">
+        <div class="flex-y">
+          <!-- <input
+            id="compareNumberInput"
+            type="number"
+            placeholder="Enter number of iterations"
+            value=""
+          /> -->
+          <input
+            id="iterationsInput"
+            type="number"
+            placeholder="Enter number of iterations"
+            value=""
+          />
+          <input
+            id="updateRateInput"
+            type="number"
+            placeholder="Update Rate"
+            value=""
+          />
+          
+        </div>
+        <button id="compareButton">GO</button>
+      </div>
+
+      <p id="loading"> </p>
+      <table id="compareTable">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>js</td>
+            <td id="js"></td>
+          </tr>
+          <tr>
+            <td>wasm</td>
+            <td id="wasm"></td>
+          </tr>
+          <tr>
+            <td>naive</td>
+            <td id="naive"></td>
+          </tr>
+        </tbody>
+      </div>
 
     <script type="module" src="src/index.js"></script>
   </body>

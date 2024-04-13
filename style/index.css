@@ -1,74 +1,163 @@
+:root {
+  --primary: #559fae;
+  --light-primary: #bae3eb;
+  --dark-primary: #3d8695;
+  --primary-transparent: #80BAC660;
+  --light-primary-transparent: #bae3eb30;
+  --dark-primary-transparent: #3d869590;
+
+  --alternative-primary: #87a6db;
+  --alternative-primary-light: #a3bfef;
+  --alternative-primary-light-light: #bbd1f7;
+  --alternative-primary-dark: #7091cb;
+  --alternative-primary-dark-dark: #5d84c7;
+  --alternative-primary-dark-dark-dark: #416fbf;
+  --alternative-primary-transparent: #87a6db30;
+
+  --secondary: #dd6a44;
+  --dark-secondary: #b05637;
+
+  --white: #FAFCFD;
+  --black: #091D20;
+  --slate: #485456;
+  --light-slate: #e1e7e8;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, clean font */
-    color: #333; /* Keeping text readable */
-    background-color: #f4f7f6; /* Softer background for less eye strain */
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--black); /* Keeping text readable */
+    background-color: var(--white); /* Softer background for less eye strain */
     margin: 0;
     padding: 20px;
     line-height: 1.6;
-  }
-  
-  h1, h2 {
-    color: #102A43; /* Darker, richer color for headings */
-    margin-bottom: 0.5em;
-  }
-  
-  h1 {
-    font-size: 2.25rem; /* Making main heading larger */
-  }
-  
-  h2 {
-    font-size: 1.75rem; /* Adjusting secondary heading size */
-    margin-top: 1em;
-  }
-  
-  p {
-    margin-bottom: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adding a subtle shadow for depth */
-  }
-  
-  th, td {
-    padding: 15px; /* More spacious padding */
-    border: 1px solid #e3e3e3; /* Lighter border */
-    text-align: left;
-  }
-  
-  th {
-    background-color: #5B7B7A; /* Accent color for headers */
-    color: #fff; /* White text for contrast */
-  }
-  
-  input, select, button {
-    font-size: 16px;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px; /* Rounded corners for a softer look */
-    border: 1px solid #ccc; /* Defined borders for inputs */
-    background: #fff; /* White background for input and select */
-  }
-  
-  button {
-    cursor: pointer;
-    background-color: #2C7A7B; /* Accent color for buttons */
-    color: #fff; /* White text on buttons */
-    border: none; /* Removing button border */
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #285E61; /* Darker shade on hover for feedback */
-  }
-  
-  #output, #time {
-    margin-top: 20px;
-    background-color: #fff; /* Background for output areas */
-    padding: 15px; /* Padding for output areas */
-    border-radius: 5px; /* Rounded corners for the output containers */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
-  }
-  
+}
+
+h1, h2 {
+  color: var(--black); /* Darker, richer color for headings */
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2.25rem; /* Making main heading larger */
+}
+
+h2 {
+  font-size: 1.75rem; /* Adjusting secondary heading size */
+  margin-top: 1em;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adding a subtle shadow for depth */
+}
+
+th, td {
+  padding: 15px; /* More spacious padding */
+  border: 1px solid var(--white); /* Lighter border */
+  text-align: left;
+}
+
+th {
+  background-color: var(--primary); /* Accent color for headers */
+  color: var(--white); /* White text for contrast */
+}
+
+input, select, button {
+  font-size: 16px;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px; /* Rounded corners for a softer look */
+  border: 1px solid var(--white); /* Defined borders for inputs */
+  background: var(--white); /* White background for input and select */
+  text-transform: uppercase;
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--secondary); /* Accent color for buttons */
+  color: var(--white); /* White text on buttons */
+  border: none; /* Removing button border */
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--dark-secondary); /* Darker shade on hover for feedback */
+}
+
+#output, #time {
+  margin-top: 20px;
+  background-color: var(--white); /* Background for output areas */
+  padding: 15px; /* Padding for output areas */
+  border-radius: 5px; /* Rounded corners for the output containers */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+}
+
+.header {
+  height: 100vh;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.flex-x {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card {
+  padding: 1rem 2rem;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+  height: fit-content;
+} 
+
+.gradient {
+  background: linear-gradient(25deg, var(--primary-transparent) 0%, var(--alternative-primary-transparent) 60%);
+}
+
+
+/* Widths */
+.w-40 {
+  width: 40vw;
+}
+
+.w-80 {
+  width: 80vw;
+}
+
+/* Colors */
+
+.var--secondary {
+  color: var(--secondary);
+}
+
+
+.border {
+  border: 3px solid var(--light-slate);
+}
+
+.ns {
+  overflow: auto;
+}

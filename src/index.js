@@ -1,21 +1,34 @@
 import { factorize, cFactorize } from './factorization.js';
 import { naiveFactorization } from './naiveFactorization.js';
 
-document.getElementById('factorizeButton').addEventListener('click', async function() {
+let selectedMethod = '';
+
+// Function to handle method selection
+const handleMethodSelection = () => {
+    const optionButtons = document.querySelectorAll('.method-btn');
+    
+    optionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            selectedMethod = button.getAttribute('data-value');
+            console.log(`Selected Method: ${selectedMethod}`);
+        });
+    });
+}
+
+// Function to handle factorization
+const handleFactorization = async () => {
     const max64Bit = (2n ** 64n) - 1n;
 
     const number = BigInt(document.getElementById('numberInput').value);
-    const method = document.getElementById('methodSelect').value;
     let result = [];
     const startTime = new Date().getTime();
-
 
     if (number > max64Bit) {
         document.getElementById('output').innerText = `Number is too large, please enter a number less than ${max64Bit}`;
         return;
     }
 
-    switch (method) {
+    switch (selectedMethod) {
         case 'wasm':
             result = await cFactorize(number);
             break;
@@ -25,17 +38,20 @@ document.getElementById('factorizeButton').addEventListener('click', async funct
         case 'naive':
             result = await naiveFactorization(number);
             break;
+        default:
+            console.error('Invalid method selected');
+            return;
     }
 
     const endTime = new Date().getTime();
-    const totalTime = (endTime - startTime); // convert to seconds
+    const totalTime = (endTime - startTime); // convert to milliseconds
 
     document.getElementById('output').innerText = `The factors are: ${result}`;
     document.getElementById('time').innerText = `Total time: ${totalTime} milliseconds`;
-});
+}
 
-
-document.getElementById('compareButton').addEventListener('click', async function() {
+// Function to handle method comparison
+const handleMethodComparison = async () => {
     const iterations = document.getElementById('iterationsInput').value;
     const updateInterval = document.getElementById('updateRateInput').value;
     const number = BigInt(document.getElementById('numberInput').value);
@@ -45,7 +61,6 @@ document.getElementById('compareButton').addEventListener('click', async functio
     document.getElementById('loading').innerText = `Loading... ${0} / ${iterations}`;
     
     for (let i = 0; i < iterations; i++) {
-
         document.getElementById('loading').innerText = `Loading... ${i} / ${iterations}`;
 
         const startTime = new Date().getTime();
@@ -74,4 +89,10 @@ document.getElementById('compareButton').addEventListener('click', async functio
         }
     }
     document.getElementById('loading').innerText = `Finished!`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    handleMethodSelection();
+    document.getElementById('factorizeButton').addEventListener('click', handleFactorization);
+    document.getElementById('compareButton').addEventListener('click', handleMethodComparison);
 });
