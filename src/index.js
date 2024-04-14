@@ -117,7 +117,7 @@ function updateStatsTable(jsTimes, wasmTimes, naiveTimes, naiveCTimes) {
   
     const naiveCMin = Math.min(...naiveCTimes);
     const naiveCMax = Math.max(...naiveCTimes);
-    const naiveCAvg = cNaiveTimes.reduce((a, b) => a + b, 0) / naiveCTimes.length;
+    const naiveCAvg = naiveCTimes.reduce((a, b) => a + b, 0) / naiveCTimes.length;
 
     const minRow = document.createElement('tr');
     minRow.innerHTML = `
