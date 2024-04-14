@@ -1,5 +1,6 @@
 import { factorize, cFactorize } from './factorization.js';
-import { naiveFactorization } from './naiveFactorization.js';
+import { naiveFactorization, cNaiveFactorization } from './naiveFactorization.js';
+
 
 document.getElementById('factorizeButton').addEventListener('click', async function() {
     const max64Bit = (2n ** 64n) - 1n;
@@ -25,6 +26,9 @@ document.getElementById('factorizeButton').addEventListener('click', async funct
         case 'naive':
             result = await naiveFactorization(number);
             break;
+        case 'cNaive':
+            result = await cNaiveFactorization(number);
+            break;
     }
 
     const endTime = new Date().getTime();
@@ -42,6 +46,7 @@ document.getElementById('compareButton').addEventListener('click', async functio
     const wasmTimes = [];
     const jsTimes = [];
     const naiveTimes = [];
+    const naiveCTimes = [];
     document.getElementById('loading').innerText = `Loading... ${0} / ${iterations}`;
     
     for (let i = 0; i < iterations; i++) {
@@ -63,14 +68,21 @@ document.getElementById('compareButton').addEventListener('click', async functio
         const endTime3 = new Date().getTime();
         naiveTimes.push(endTime3 - startTime3);
 
+        const startTime4 = new Date().getTime();
+        await cNaiveFactorization(number);
+        const endTime4 = new Date().getTime();
+        naiveCTimes.push(endTime4 - startTime4);
+
         if (i % updateInterval === 0) {
             const wasmAverage = wasmTimes.reduce((a, b) => a + b, 0) / wasmTimes.length;
             const jsAverage = jsTimes.reduce((a, b) => a + b, 0) / jsTimes.length;
             const naiveAverage = naiveTimes.reduce((a, b) => a + b, 0) / naiveTimes.length;
+            const naiveCAverage = naiveCTimes.reduce((a, b) => a + b, 0) / naiveTimes.length;
     
             document.getElementById('js').innerText = `JS average time: ${jsAverage.toFixed(3)} milliseconds`;
             document.getElementById('wasm').innerText = `WASM average time: ${wasmAverage.toFixed(3)} milliseconds`;
             document.getElementById('naive').innerText = `Naive JS average time: ${naiveAverage.toFixed(3)} milliseconds`;
+            document.getElementById('naiveC').innerText = `Naive C average time: ${naiveCAverage.toFixed(3)} milliseconds`;
         }
     }
     document.getElementById('loading').innerText = `Finished!`;
