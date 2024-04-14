@@ -36,6 +36,7 @@
           <button class="method-btn selected" data-value="wasm">Optimized WASM</button>
           <button class="method-btn" data-value="js">Optimized JS</button>
           <button class="method-btn" data-value="naive">Naive JS</button>
+          <button class="method-btn" data-value="cNaive">Naive C</button>
         </div>
         <hr/>
         <div class="flex-y">
@@ -184,6 +185,7 @@
                   <th>JS</th>
                   <th>WASM</th>
                   <th>Naive</th>
+                  <th>Naive C</th>
               </tr>
           </thead>
           <tbody id="tableBody">
@@ -192,23 +194,25 @@
                   <td id="jsMin">-</td>
                   <td id="wasmMin">-</td>
                   <td id="naiveMin">-</td>
+                  <td id="naiveCMin">-</td>
               </tr>
               <tr>
                   <td>Max</td>
                   <td id="jsMax">-</td>
                   <td id="wasmMax">-</td>
                   <td id="naiveMax">-</td>
+                  <td id="naiveCMax">-</td>
               </tr>
               <tr>
                   <td>Average</td>
                   <td id="jsAvg">-</td>
                   <td id="wasmAvg">-</td>
                   <td id="naiveAvg">-</td>
+                  <td id="naiveCAvg">-</td>
               </tr>
           </tbody>
         </table>
       </div>
-
     <script type="module" src="src/index.js"></script>
   </body>
 </html>

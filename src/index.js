@@ -1,5 +1,6 @@
 import { factorize, cFactorize } from './factorization.js';
-import { naiveFactorization } from './naiveFactorization.js';
+import { naiveFactorization, cNaiveFactorization } from './naiveFactorization.js';
+
 
 let selectedMethod = 'wasm';
 let racingChart;
@@ -66,6 +67,9 @@ const handleFactorization = async () => {
             case 'naive':
                 result = await naiveFactorization(number);
                 break;
+            case 'cNaive':
+                result = await cNaiveFactorization(number);
+                break;
             default:
                 throw new Error('Invalid method selected');
         }
@@ -94,7 +98,7 @@ const handleFactorization = async () => {
 }
 
 // Function to update the stats table
-function updateStatsTable(jsTimes, wasmTimes, naiveTimes) {
+function updateStatsTable(jsTimes, wasmTimes, naiveTimes, naiveCTimes) {
     // Update the table with average, min, and max values
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
@@ -110,10 +114,10 @@ function updateStatsTable(jsTimes, wasmTimes, naiveTimes) {
     const naiveMin = Math.min(...naiveTimes);
     const naiveMax = Math.max(...naiveTimes);
     const naiveAvg = naiveTimes.reduce((a, b) => a + b, 0) / naiveTimes.length;
-
-    console.log(jsMin, jsMax, jsAvg, "js");
-    console.log(wasmMin, wasmMax, wasmAvg, "wasm");
-    console.log(naiveMin, naiveMax, naiveAvg, "naive");
+  
+    const naiveCMin = Math.min(...naiveCTimes);
+    const naiveCMax = Math.max(...naiveCTimes);
+    const naiveCAvg = cNaiveTimes.reduce((a, b) => a + b, 0) / naiveCTimes.length;
 
     const minRow = document.createElement('tr');
     minRow.innerHTML = `
@@ -121,6 +125,7 @@ function updateStatsTable(jsTimes, wasmTimes, naiveTimes) {
         <td>${jsMin.toFixed(3)} ms</td>
         <td>${wasmMin.toFixed(3)} ms</td>
         <td>${naiveMin.toFixed(3)} ms</td>
+        <td>${naiveCMin.toFixed(3)} ms</td>
     `;
     tableBody.appendChild(minRow);
 
@@ -130,6 +135,7 @@ function updateStatsTable(jsTimes, wasmTimes, naiveTimes) {
         <td>${jsMax.toFixed(3)} ms</td>
         <td>${wasmMax.toFixed(3)} ms</td>
         <td>${naiveMax.toFixed(3)} ms</td>
+        <td>${naiveCMax.toFixed(3)} ms</td>
     `;
     tableBody.appendChild(maxRow);
 
@@ -139,12 +145,13 @@ function updateStatsTable(jsTimes, wasmTimes, naiveTimes) {
         <td>${jsAvg.toFixed(3)} ms</td>
         <td>${wasmAvg.toFixed(3)} ms</td>
         <td>${naiveAvg.toFixed(3)} ms</td>
+        <td>${naiveCAvg.toFixed(3)} ms</td>
     `;
     tableBody.appendChild(avgRow);
 }
 
 // Function to update racing graph
-function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes) {
+function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes, naiveCTimes) {
     const ctx = document.getElementById('racingGraph').getContext('2d');
 
     if (racingChart) {
@@ -152,6 +159,7 @@ function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes) {
         racingChart.data.datasets[0].data = jsTimes;
         racingChart.data.datasets[1].data = wasmTimes;
         racingChart.data.datasets[2].data = naiveTimes;
+        racingChart.data.datasets[3].data = naiveCTimes;
         racingChart.update();  // Update the existing chart with new data
         return;
     }
@@ -185,6 +193,16 @@ function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes) {
                     label: 'naive',
                     data: naiveTimes,
                     borderColor: '#dd6a44',
+                    backgroundColor: '#FAFCFD',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    pointHoverRadius: 10,
+                    fill: false
+                },
+                {
+                    label: 'C naive',
+                    data: naiveCTimes,
+                    borderColor: '#485456',
                     backgroundColor: '#FAFCFD',
                     borderWidth: 3,
                     pointRadius: 0,
@@ -261,6 +279,7 @@ const handleMethodComparison = async () => {
     const wasmTimes = [];
     const jsTimes = [];
     const naiveTimes = [];
+    const naiveCTimes = [];
     
     for (let i = 0; i < iterations; i++) {
         const startTime = new Date().getTime();
@@ -278,9 +297,14 @@ const handleMethodComparison = async () => {
         const endTime3 = new Date().getTime();
         naiveTimes.push(endTime3 - startTime3);
 
+        const startTime4 = new Date().getTime();
+        await cNaiveFactorization(number);
+        const endTime4 = new Date().getTime();
+        naiveCTimes.push(endTime4 - startTime4);
+
         if (i % updateInterval === 0) {
-            updateRacingGraph(i, jsTimes, wasmTimes, naiveTimes);
-            updateStatsTable(jsTimes, wasmTimes, naiveTimes);
+            updateRacingGraph(i, jsTimes, wasmTimes, naiveTimes, naiveCTimes);
+            updateStatsTable(jsTimes, wasmTimes, naiveTimes, naiveCTimes);
         }
     }
 }
