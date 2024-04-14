@@ -15,6 +15,7 @@
   --alternative-primary-transparent: #87a6db30;
 
   --secondary: #dd6a44;
+  --secondary-transparent: #dd6a4470;
   --dark-secondary: #b05637;
 
   --white: #FAFCFD;
@@ -30,6 +31,7 @@ body {
     margin: 0;
     padding: 20px;
     line-height: 1.6;
+    text-align: center;
 }
 
 h1, h2 {
@@ -43,11 +45,17 @@ h1 {
 
 h2 {
   font-size: 1.75rem; /* Adjusting secondary heading size */
-  margin-top: 1em;
+  margin: 1rem 0rem;
 }
 
 p {
   margin-bottom: 20px;
+}
+
+hr {
+  margin: 30px 0;
+  border: 2px solid var(--light-slate); /* Lighter border color */
+
 }
 
 table {
@@ -94,16 +102,9 @@ button {
   box-shadow: 0 0 10px var(--secondary);
 }
 
-#output, #time {
-  margin-top: 20px;
-  background-color: var(--white); /* Background for output areas */
-  padding: 15px; /* Padding for output areas */
-  border-radius: 5px; /* Rounded corners for the output containers */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
-}
-
 .header {
-  height: 100vh;
+  height: 70vh;
+  padding-top: 14rem;
 }
 
 .flex {
@@ -120,6 +121,7 @@ button {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .flex-y {
@@ -129,29 +131,17 @@ button {
   align-items: center;
 }
 
-.card {
-  padding: 1rem 2rem;
-  margin: 2rem 0;
-  border-radius: 1rem;
-  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
-  height: fit-content;
-} 
-
-.gradient {
-  background: linear-gradient(25deg, var(--primary-transparent) 0%, var(--alternative-primary-transparent) 60%);
+.align-start {
+  align-items: start;
 }
 
-/* Widths */
-.w-30 {
-  width: 30vw;
+.justify-start {
+  justify-content: start;
+  gap: 1rem
 }
 
-.w-50 {
-  width: 50vw;
-}
-
-.w-80 {
-  width: 80vw;
+.justify-space-between {
+  justify-content: space-between;
 }
 
 /* Colors */
@@ -165,16 +155,8 @@ button {
   border: 3px solid var(--light-slate);
 }
 
-.ns {
-  overflow: auto;
-}
-
-.tag-number {
-  background-color: var(--alternative-primary-transparent);
-  font-weight: bold;
-  border-radius: 2rem;
-  font-size: 1.2rem;
-  padding: 0.2rem 1rem;
+.gradient {
+  background: linear-gradient(25deg, var(--primary-transparent) 0%, var(--alternative-primary-transparent) 60%);
 }
 
 .go-btn {
@@ -187,20 +169,115 @@ button {
   box-shadow: 0 0 10px var(--alternative-primary);
 }
 
+.icon-btn {
+  height: 4rem;
+  width: 4rem;
+}
+
+.go-btn {
+  font-size: 2rem;
+  border-radius: 4rem;
+  height: 6rem;
+  width: 6rem;
+}
+
+.random-input-container {
+  background-color: var(--white);
+  border-radius: 4rem;
+  padding-left: 0rem;
+}
+
+.number-input-container {
+  background-color: var(--light-slate);
+  padding: 3rem 2rem;
+  border-radius: 10rem;
+  margin: 2rem;
+}
+
 .number-input {
-  width: 60%;
+  width: 70%;
+  text-align: center;
   padding: 1rem;
   border-radius: 4rem;
-  background-color: var(--light-slate);
+  background-color: var(--white);
   color: var(--black);
-  /* border: 3px solid var(--light-slate); */
   font-size: 3rem;
   outline: none;
   font-weight: 700;
   appearance: textfield;
+  border: 3px solid var(--white);
+  transition: border 0.3s ease;
 }
 
-.number-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+.method-button-container {
+  margin: 2rem 0rem;
+}
+
+#time {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 1rem 2rem;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+  height: fit-content;
+} 
+
+.tag-number {
+  background-color: var(--alternative-primary-transparent);
+  font-weight: bold;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  padding: 0.2rem 1rem;
+}
+
+.loading-bar {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 1rem;
+  margin: 2rem 1rem;
+}
+
+.progress {
+  margin: 0rem;
+  width: 0%;
+  height: 1rem;
+  background-color: var(--secondary);
+  border-radius: 1rem;
+  transition: width 0.3s ease;
+}
+
+.graph-container {
+  margin-top: 20px;
+}
+
+#racingGraph {
+  height: 500px;
+}
+
+/* Font size */
+
+.font-medium {
+  font-size: 1.5rem;
+}
+
+/* Widths */
+
+.w-30 {
+  width: 30vw;
+}
+
+.w-50 {
+  width: 50vw;
+}
+
+.w-80 {
+  width: 80vw;
+}
+
+.w-90 {
+  width: 90vw;
 }
