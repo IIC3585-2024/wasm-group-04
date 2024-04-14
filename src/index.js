@@ -28,13 +28,13 @@ const generateRandomNumbers = () => {
     const input = document.getElementById('numberInput');
   
     const interval = setInterval(() => {
-      const randomNumber = Math.random() * 18446744073709551615; // Generates a random number between 0 and 18446744073709551615
-      input.value = randomNumber;
+        const randomNumber = Math.random() * 18446744073709551615; // Generates a random number between 0 and 18446744073709551615
+        input.value = randomNumber;
     }, 50); // Interval of 50 milliseconds to generate new random numbers
     
     // Stop generating random numbers after 1 second
     setTimeout(() => {
-      clearInterval(interval);
+        clearInterval(interval);
     }, 1000);
 };
 
@@ -145,88 +145,88 @@ function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes) {
     }
   
     racingChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: Array.from({ length: iterations }, (_, i) => i + 1),
-        datasets: [
-            {
-              label: 'js',
-              data: jsTimes,
-              borderColor: '#559fae',
-              backgroundColor: '#FAFCFD',
-              borderWidth: 3,
-              pointRadius: 0,
-              pointHoverRadius: 10,
-              fill: false
-            },
-            {
-              label: 'wasm',
-              data: wasmTimes,
-              borderColor: '#87a6db',
-              backgroundColor: '#FAFCFD',
-              borderWidth: 3,
-              pointRadius: 0,
-              pointHoverRadius: 10,
-              fill: false
-            },
-            {
-              label: 'naive',
-              data: naiveTimes,
-              borderColor: '#dd6a44',
-              backgroundColor: '#FAFCFD',
-              borderWidth: 3,
-              pointRadius: 0,
-              pointHoverRadius: 10,
-              fill: false
-            }
-          ]
-        },
-      options: {
-        animation: {
-            duration: 0, // Duration of the animation in milliseconds
-        },
-        scales: {
-            x: {
-                grid: {
-                  display: false
+        type: 'line',
+        data: {
+            labels: Array.from({ length: iterations }, (_, i) => i + 1),
+            datasets: [
+                {
+                    label: 'js',
+                    data: jsTimes,
+                    borderColor: '#559fae',
+                    backgroundColor: '#FAFCFD',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    pointHoverRadius: 10,
+                    fill: false
                 },
-                title: {
-                  display: false,
-                  text: 'Iteration',
-                  font: {
-                    size: 16,
-                    weight: 'bold',
-                    color: 'red'
-                  }
+                {
+                    label: 'wasm',
+                    data: wasmTimes,
+                    borderColor: '#87a6db',
+                    backgroundColor: '#FAFCFD',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    pointHoverRadius: 10,
+                    fill: false
+                },
+                {
+                    label: 'naive',
+                    data: naiveTimes,
+                    borderColor: '#dd6a44',
+                    backgroundColor: '#FAFCFD',
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    pointHoverRadius: 10,
+                    fill: false
                 }
-              },
-          y: {
-            beginAtZero: true,
-            grid: {
-                display: false
+            ]
             },
-            ticks: {
-                font: {
-                    size: 20,
-                    color: 'red'
-                }
-              },
-            title: {
-              display: true,
-              text: 'Milliseconds'
-            }
-          }
-        },
-        plugins: {
-            legend: {
-                labels: {
+        options: {
+            animation: {
+                duration: 0, // Duration of the animation in milliseconds
+            },
+            scales: {
+                x: {
+                        grid: {
+                        display: false
+                    },
+                    title: {
+                        display: false,
+                        text: 'Iteration',
+                        font: {
+                            size: 16,
+                            weight: 'bold',
+                            color: 'red'
+                        }
+                    }
+                },
+            y: {
+                beginAtZero: true,
+                grid: {
+                    display: false
+                },
+                ticks: {
                     font: {
-                        size: 20
+                        size: 20,
+                        color: 'red'
+                    }
+                },
+                    title: {
+                    display: true,
+                    text: 'Milliseconds'
+                }
+            }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 20
+                        }
                     }
                 }
             }
         }
-      }
     });
 }
 
