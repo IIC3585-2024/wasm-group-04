@@ -1,74 +1,330 @@
+:root {
+  --primary: #559fae;
+  --light-primary: #bae3eb;
+  --dark-primary: #3d8695;
+  --primary-transparent: #80BAC660;
+  --light-primary-transparent: #bae3eb30;
+  --dark-primary-transparent: #3d869590;
+
+  --alternative-primary: #87a6db;
+  --alternative-primary-light: #a3bfef;
+  --alternative-primary-light-light: #bbd1f7;
+  --alternative-primary-dark: #7091cb;
+  --alternative-primary-dark-dark: #5d84c7;
+  --alternative-primary-dark-dark-dark: #416fbf;
+  --alternative-primary-transparent: #87a6db30;
+
+  --secondary: #dd6a44;
+  --secondary-transparent: #dd6a4470;
+  --dark-secondary: #b05637;
+
+  --white: #FAFCFD;
+  --black: #091D20;
+  --slate: #485456;
+  --light-slate: #e1e7e8;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, clean font */
-    color: #333; /* Keeping text readable */
-    background-color: #f4f7f6; /* Softer background for less eye strain */
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--black); /* Keeping text readable */
+    background-color: var(--white); /* Softer background for less eye strain */
     margin: 0;
     padding: 20px;
     line-height: 1.6;
-  }
-  
-  h1, h2 {
-    color: #102A43; /* Darker, richer color for headings */
-    margin-bottom: 0.5em;
-  }
-  
-  h1 {
-    font-size: 2.25rem; /* Making main heading larger */
-  }
-  
-  h2 {
-    font-size: 1.75rem; /* Adjusting secondary heading size */
-    margin-top: 1em;
-  }
-  
-  p {
-    margin-bottom: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adding a subtle shadow for depth */
-  }
-  
-  th, td {
-    padding: 15px; /* More spacious padding */
-    border: 1px solid #e3e3e3; /* Lighter border */
-    text-align: left;
-  }
-  
-  th {
-    background-color: #5B7B7A; /* Accent color for headers */
-    color: #fff; /* White text for contrast */
-  }
-  
-  input, select, button {
-    font-size: 16px;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px; /* Rounded corners for a softer look */
-    border: 1px solid #ccc; /* Defined borders for inputs */
-    background: #fff; /* White background for input and select */
-  }
-  
-  button {
-    cursor: pointer;
-    background-color: #2C7A7B; /* Accent color for buttons */
-    color: #fff; /* White text on buttons */
-    border: none; /* Removing button border */
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #285E61; /* Darker shade on hover for feedback */
-  }
-  
-  #output, #time {
-    margin-top: 20px;
-    background-color: #fff; /* Background for output areas */
-    padding: 15px; /* Padding for output areas */
-    border-radius: 5px; /* Rounded corners for the output containers */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
-  }
-  
+    text-align: center;
+}
+
+h1, h2 {
+  color: var(--black); /* Darker, richer color for headings */
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2.25rem; /* Making main heading larger */
+}
+
+h2 {
+  font-size: 1.75rem; /* Adjusting secondary heading size */
+  margin: 1rem 0rem;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+hr {
+  margin: 30px 0;
+  border: 2px solid var(--light-slate); /* Lighter border color */
+
+}
+
+table {
+  width: 60%;
+  border-collapse: collapse;
+  margin: 2rem 0rem;
+  color: var(--slate);
+  transition: width 0.3s ease;
+  border-radius: 1rem;
+}
+
+th, td {
+  padding: 15px; /* More spacious padding */
+  border: 1px solid var(--white); /* Lighter border */
+  text-align: left;
+}
+
+th {
+  background-color: var(--secondary); /* Accent color for headers */
+  color: var(--white); /* White text for contrast */
+  text-transform: uppercase;
+}
+
+input, select {
+  font-size: 16px;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px; /* Rounded corners for a softer look */
+  border: 1px solid var(--white); /* Defined borders for inputs */
+  background: var(--white); /* White background for input and select */
+  text-transform: uppercase;
+}
+
+button {
+  font-size: 1rem;
+  text-transform: uppercase;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: var(--secondary); /* Accent color for buttons */
+  color: var(--white); /* White text on buttons */
+  border-radius: 2rem;
+  border: none; /* Removing button border */
+  transition: box-shadow 0.3s ease;
+}
+
+.selected, button:hover {
+  box-shadow: 0 0 10px var(--secondary);
+}
+
+.header {
+  padding-top: 14rem;
+  min-height: fit-content;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.flex-x {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.flex-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.align-start {
+  align-items: start;
+}
+
+.justify-start {
+  justify-content: start;
+  gap: 1rem
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-space-around {
+  justify-content: space-around;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+/* Colors */
+
+.var--alternative-primary {
+  color: var(--alternative-primary);
+}
+
+.var--alternative-primary-light {
+  color: var(--alternative-primary-light);
+}
+
+.var--alternative-primary-light-light {
+  color: var(--alternative-primary-light-light);
+}
+
+.var--alternative-primary-dark {
+  color: var(--alternative-primary-dark);
+}
+
+.var--alternative-primary-dark-dark {
+  color: var(--alternative-primary-dark-dark);
+}
+
+.var--alternative-primary-dark-dark-dark {
+  color: var(--alternative-primary-dark-dark-dark);
+}
+
+.var--secondary {
+  color: var(--secondary);
+}
+
+
+.border {
+  border: 3px solid var(--light-slate);
+}
+
+.gradient {
+  background: linear-gradient(25deg, var(--primary-transparent) 0%, var(--alternative-primary-transparent) 60%);
+}
+
+.go-btn {
+  background-color: var(--alternative-primary);
+  color: var(--black);
+  font-weight: 700;
+  margin: 0.5rem;
+}
+
+.go-btn:hover {
+  box-shadow: 0 0 10px var(--alternative-primary);
+}
+
+.icon-btn {
+  height: 4rem;
+  width: 4rem;
+}
+
+.go-btn {
+  font-size: 2rem;
+  border-radius: 4rem;
+  height: 6rem;
+  width: 6rem;
+}
+
+.go-btn[disabled] {
+  opacity: 0.6; /* Reduced opacity for the disabled button */
+  cursor: not-allowed; /* Change cursor to 'not-allowed' when disabled */
+}
+
+.random-input-container {
+  background-color: var(--white);
+  border-radius: 4rem;
+  padding-left: 0rem;
+}
+
+.number-input-container {
+  background-color: var(--light-slate);
+  padding: 3rem 2rem;
+  border-radius: 10rem;
+  margin: 2rem;
+}
+
+.number-input {
+  width: 70%;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 4rem;
+  background-color: var(--white);
+  color: var(--black);
+  font-size: 3rem;
+  outline: none;
+  font-weight: 700;
+  appearance: textfield;
+  border: 3px solid var(--white);
+  transition: border 0.3s ease;
+}
+
+.method-button-container {
+  margin: 2rem 0rem;
+}
+
+#time {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 1rem 2rem;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+  height: fit-content;
+} 
+
+.tag-number {
+  background-color: var(--alternative-primary-transparent);
+  font-weight: bold;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  padding: 0.2rem 1rem;
+}
+
+.loading-bar {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 1rem;
+  margin: 2rem 1rem;
+}
+
+.progress {
+  margin: 0rem;
+  width: 0%;
+  height: 1rem;
+  background-color: var(--secondary);
+  border-radius: 1rem;
+  transition: width 0.3s ease;
+}
+
+.graph-container {
+  margin-top: 20px;
+}
+
+#racingGraph {
+  height: 500px;
+  margin-bottom: 2rem;
+}
+
+/* Font size */
+
+.font-medium {
+  font-size: 1.5rem;
+}
+
+/* Widths */
+
+.w-30 {
+  width: 30vw;
+}
+
+.w-40 {
+  width: 40vw;
+}
+
+.w-50 {
+  width: 50vw;
+}
+
+.w-80 {
+  width: 80vw;
+}
+
+.w-90 {
+  width: 90vw;
+}

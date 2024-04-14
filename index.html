@@ -5,121 +5,214 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Hello world</title>
     <link rel="stylesheet" href="style/index.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <h1>Pollard's rho Integer Factorization</h1>
-    <p>
-      Note that the difficulty of integer factorization depends on the given
-      number. The complexity is bigger when the factors are bigger. So for example in the table
-      given below the difficulty of the number 18446744073709551615 is lower than the number 10000454604920513 even
-      when the first is smaller. So the complexity is a function of the result of the function, not the size of the input.
-    </p>
-    <h2>Input pairs for different difficulties</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Difficulty</th>
-          <th>factors</th>
-          <th>Multiplication</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Easy</td>
-          <td>1, 2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>Easy</td>
-          <td>3,4,</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <td>Medium</td>
-          <td>3,5,17,641,257,65537,6700417</td>
-          <td>18446744073709551615</td>
-        </tr>
-        <tr>
-          <td>Hard</td>
-          <td>10739063, 10739623</td>
-          <td>115333487993249</td>
-        </tr>
-        <tr>
-          <td>Very Hard</td>
-          <td>100002769, 100001777</td>
-          <td>10000454604920513</td>
-        </tr>
-        <tr>
-          <td>Insane</td>
-          <td>1000003211, 1000003793</td>
-          <td>1000007004012179323</td>
-        </tr>
-        <tr>
-          <td>God Mode</td>
-          <td>48179, 207560763820789</td>
-          <td>10000070040121793231</td>
-        </tr>
-      </tbody>
-    </table>
-    <h2>Factorize a number</h2>
+    <div class="header flex-x align-start">
+      <div class="card w-30 gradient">
+        <h1><span class="var--secondary">Pollard's</span> rho <br> Integer Factorization</h1>
+        <p>
+          Note that the difficulty of integer factorization depends on the given
+          number. The complexity is bigger when the factors are bigger. So for example in the table
+          given below the difficulty of the number 18446744073709551615 is lower than the number 10000454604920513 even
+          when the first is smaller. So the complexity is a function of the result of the function, not the size of the input.
+        </p>
+      </div>
+      <div class="card w-50 flex-y">
+        <div class="flex-x number-input-container no-wrap">
+          <div class="random-input-container flex-x">
+            <input
+              id="numberInput"
+              type="number"
+              placeholder="Enter a number"
+              class="number-input"
+            />
+            <button class="icon-btn" id="randomNumber"><i class="material-icons">shuffle</i></button>
+          </div>
+          <button id="factorizeButton" class="go-btn">go</button>
+        </div>
+        <div class="flex-x w-40 method-button-container">
+          <button class="method-btn selected" data-value="wasm">Optimized WASM</button>
+          <button class="method-btn" data-value="js">Optimized JS</button>
+          <button class="method-btn" data-value="naive">Naive JS</button>
+          <button class="method-btn" data-value="cNaive">Naive C</button>
+        </div>
+        <hr/>
+        <div class="flex-y">
+          <div id="time"></div>
+          <div class="flex" id="output"></div>
+        </div>
+      </div>
+    </div>
 
-    <input
-      id="numberInput"
-      type="number"
-      placeholder="Enter a number"
-      value="18446744073709551615"
-    />
-    <select id="methodSelect">
-      <option value="js">js</option>
-      <option value="wasm">wasm C</option>
-      <option value="naive">naive js</option>
-      <option value="cNaive">naive C</option>
-    </select>
-    <button id="factorizeButton">Factorize</button>
-    <p id="output"></p>
-    <div id="time"></div>
+    <hr/>
 
-    <h2>Compare after multiple iterations</h2>
-    <input
-      id="iterationsInput"
-      type="number"
-      placeholder="Enter number of iterations"
-      value=""
-    />
-    <input
-      id="updateRateInput"
-      type="number"
-      placeholder="Update Rate"
-      value=""
-    />
-    <button id="compareButton">Compare</button>
-    <p id="loading"> </p>
-    <table id="compareTable">
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>js</td>
-          <td id="js"></td>
-        </tr>
-        <tr>
-          <td>wasm</td>
-          <td id="wasm"></td>
-        </tr>
-        <tr>
-          <td>naive</td>
-          <td id="naive"></td>
-        </tr>
-        <tr>
-          <td>naive c</td>
-          <td id="naiveC"></td>
-        </tr>
-      </tbody>
+    <div class="flex-y">
+      <h2>Input pairs for different difficulties</h2>
 
+      <div class="card w-80 border">
+        <div class="flex-x justify-space-between">
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-light-light">Easy</h1>
+            <h2>12</h2>
+          </div>
+          <div class="flex-y">
+            <div class="flex-x w-40 justify-start">
+              <p class="tag-number">2</p>
+              <p class="tag-number">2</p>
+              <p class="tag-number">3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 border">
+        <div class="flex-x justify-space-between">
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-light">Medium</h1>
+            <h2>18446744073709551615</h2>
+          </div>
+          <div class="flex-y">
+            <div class="flex-x w-40 justify-start">
+              <p class="tag-number">3</p>
+              <p class="tag-number">5</p>
+              <p class="tag-number">17</p>
+              <p class="tag-number">641</p>
+              <p class="tag-number">257</p>
+              <p class="tag-number">65537</p>
+              <p class="tag-number">6700417</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card w-80 border">
+        <div class="flex-x justify-space-between">
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary">Hard</h1>
+            <h2>115333487993249</h2>
+          </div>
+          <div class="flex-y">
+            <div class="flex-x w-40 justify-start">
+              <p class="tag-number">10739063</p>
+              <p class="tag-number">10739623</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 border">
+        <div class="flex-x justify-space-between">
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-dark">Very hard</h1>
+            <h2>10000454604920513</h2>
+          </div>
+          <div class="flex-y">
+            <div class="flex-x w-40 justify-start">
+              <p class="tag-number">100002769</p>
+              <p class="tag-number">100001777</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 border">
+        <div class="flex-x justify-space-between">
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-dark">Insane</h1>
+            <h2>1000007004012179323</h2>
+          </div>
+          <div class="flex-y">
+            <div class="flex-x w-40 justify-start">
+              <p class="tag-number">1000003211</p>
+              <p class="tag-number">1000003793</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 border">
+        <div class="flex-x justify-space-between">
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-dark">God mode</h1>
+            <h2>10000070040121793231</h2>
+          </div>
+          <div class="flex-y">
+            <div class="flex-x w-40 justify-start">
+              <p class="tag-number">48179</p>
+              <p class="tag-number">207560763820789</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="w-90"/>
+
+      <h2>Compare after multiple iterations</h2>
+      <div class="flex-x">
+        <div class="flex-y">
+          <div class="flex-x justify-space-between">
+            <button id="compareButton" class="go-btn">GO</button>
+            <div class="flex-y align-start">
+              <input
+                id="iterationsNumberInput"
+                type="number"
+                placeholder="Enter number"
+                value=""
+                class="number-input"
+              />
+              <input
+                id="iterationsInput"
+                type="number"
+                placeholder="Enter number of iterations"
+                value=""
+                class="number-input font-medium"
+              />
+            </div>
+          </div>
+        </div>
+        
+        <div class="graph-container">
+          <canvas id="racingGraph"></canvas>
+        </div>
+      </div>
+      
+        <table id="compareTable">
+          <thead>
+              <tr>
+                  <th>Statistic</th>
+                  <th>JS</th>
+                  <th>WASM</th>
+                  <th>Naive</th>
+                  <th>Naive C</th>
+              </tr>
+          </thead>
+          <tbody id="tableBody">
+              <tr>
+                  <td>Min</td>
+                  <td id="jsMin">-</td>
+                  <td id="wasmMin">-</td>
+                  <td id="naiveMin">-</td>
+                  <td id="naiveCMin">-</td>
+              </tr>
+              <tr>
+                  <td>Max</td>
+                  <td id="jsMax">-</td>
+                  <td id="wasmMax">-</td>
+                  <td id="naiveMax">-</td>
+                  <td id="naiveCMax">-</td>
+              </tr>
+              <tr>
+                  <td>Average</td>
+                  <td id="jsAvg">-</td>
+                  <td id="wasmAvg">-</td>
+                  <td id="naiveAvg">-</td>
+                  <td id="naiveCAvg">-</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
     <script type="module" src="src/index.js"></script>
   </body>
 </html>
