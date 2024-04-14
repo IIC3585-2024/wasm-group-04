@@ -19,8 +19,8 @@
           when the first is smaller. So the complexity is a function of the result of the function, not the size of the input.
         </p>
       </div>
-      <div class="card w-50">
-        <div class="flex-x number-input-container">
+      <div class="card w-50 flex-y">
+        <div class="flex-x number-input-container no-wrap">
           <div class="random-input-container flex-x">
             <input
               id="numberInput"
@@ -34,15 +34,9 @@
         </div>
         <div class="flex-x w-40 method-button-container">
           <button class="method-btn selected" data-value="wasm">Optimized WASM</button>
-          <!-- <button class="method-btn" data-value="js">Naive WASM</button> -->
           <button class="method-btn" data-value="js">Optimized JS</button>
           <button class="method-btn" data-value="naive">Naive JS</button>
         </div>
-        <!-- <select  class="ns" id="methodSelect">
-          <option value="js">JS</option>
-          <option value="wasm">WASM C</option>
-          <option value="naive">Naive js</option>
-        </select> -->
         <hr/>
         <div class="flex-y">
           <div id="time"></div>
@@ -58,10 +52,12 @@
 
       <div class="card w-80 border">
         <div class="flex-x justify-space-between">
-          <h1>Easy</h1>
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-light-light">Easy</h1>
+            <h2>12</h2>
+          </div>
           <div class="flex-y">
-            <div class="flex-x w-50 justify-start">
-              <h2>12</h2>
+            <div class="flex-x w-40 justify-start">
               <p class="tag-number">2</p>
               <p class="tag-number">2</p>
               <p class="tag-number">3</p>
@@ -72,10 +68,12 @@
 
       <div class="card w-80 border">
         <div class="flex-x justify-space-between">
-          <h1>Medium</h1>
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-light">Medium</h1>
+            <h2>18446744073709551615</h2>
+          </div>
           <div class="flex-y">
-            <div class="flex-x w-50 justify-start">
-              <h2>18446744073709551615</h2>
+            <div class="flex-x w-40 justify-start">
               <p class="tag-number">3</p>
               <p class="tag-number">5</p>
               <p class="tag-number">17</p>
@@ -90,10 +88,12 @@
       
       <div class="card w-80 border">
         <div class="flex-x justify-space-between">
-          <h1>Hard</h1>
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary">Hard</h1>
+            <h2>115333487993249</h2>
+          </div>
           <div class="flex-y">
-            <div class="flex-x w-50 justify-start">
-              <h2>115333487993249</h2>
+            <div class="flex-x w-40 justify-start">
               <p class="tag-number">10739063</p>
               <p class="tag-number">10739623</p>
             </div>
@@ -103,10 +103,12 @@
 
       <div class="card w-80 border">
         <div class="flex-x justify-space-between">
-          <h1>Very hard</h1>
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-dark">Very hard</h1>
+            <h2>10000454604920513</h2>
+          </div>
           <div class="flex-y">
-            <div class="flex-x w-50 justify-start">
-              <h2>10000454604920513</h2>
+            <div class="flex-x w-40 justify-start">
               <p class="tag-number">100002769</p>
               <p class="tag-number">100001777</p>
             </div>
@@ -116,10 +118,12 @@
 
       <div class="card w-80 border">
         <div class="flex-x justify-space-between">
-          <h1>Insane</h1>
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-dark">Insane</h1>
+            <h2>1000007004012179323</h2>
+          </div>
           <div class="flex-y">
-            <div class="flex-x w-50 justify-start">
-              <h2>1000007004012179323</h2>
+            <div class="flex-x w-40 justify-start">
               <p class="tag-number">1000003211</p>
               <p class="tag-number">1000003793</p>
             </div>
@@ -129,10 +133,12 @@
 
       <div class="card w-80 border">
         <div class="flex-x justify-space-between">
-          <h1>God mode</h1>
+          <div class="flex-x w-30 justify-space-between">
+            <h1 class="var--alternative-primary-dark">God mode</h1>
+            <h2>10000070040121793231</h2>
+          </div>
           <div class="flex-y">
-            <div class="flex-x w-50 justify-start">
-              <h2>10000070040121793231</h2>
+            <div class="flex-x w-40 justify-start">
               <p class="tag-number">48179</p>
               <p class="tag-number">207560763820789</p>
             </div>
@@ -145,34 +151,32 @@
       <h2>Compare after multiple iterations</h2>
       <div class="flex-x">
         <div class="flex-y">
-          <input
-            id="iterationsNumberInput"
-            type="number"
-            placeholder="Enter number"
-            value=""
-            class="number-input"
-          />
-          <input
-            id="iterationsInput"
-            type="number"
-            placeholder="Enter number of iterations"
-            value=""
-            class="number-input font-medium"
-          />
+          <div class="flex-x justify-space-between">
+            <button id="compareButton" class="go-btn">GO</button>
+            <div class="flex-y align-start">
+              <input
+                id="iterationsNumberInput"
+                type="number"
+                placeholder="Enter number"
+                value=""
+                class="number-input"
+              />
+              <input
+                id="iterationsInput"
+                type="number"
+                placeholder="Enter number of iterations"
+                value=""
+                class="number-input font-medium"
+              />
+            </div>
+          </div>
         </div>
-        <button id="compareButton" class="go-btn">GO</button>
-      </div>
-
-      <div class="loading-bar">
-        <div class="progress" id="progressBar">
-        </div>
-      </div>
-
-      <div class="graph-container">
-        <h2>Racing Graph</h2>
-        <canvas id="racingGraph"></canvas>
-      </div>
         
+        <div class="graph-container">
+          <canvas id="racingGraph"></canvas>
+        </div>
+      </div>
+      
         <table id="compareTable">
           <thead>
               <tr>

@@ -51,7 +51,6 @@ const handleFactorization = async () => {
         return;
     }
 
-
     switch (selectedMethod) {
         case 'wasm':
             result = await cFactorize(number);
@@ -79,102 +78,11 @@ const handleFactorization = async () => {
         p.classList.add('tag-number');
         document.getElementById('output').appendChild(p);
     });
-    // document.getElementById('output').innerText = `The factors are: ${result}`;
     document.getElementById('time').innerText = `${totalTime} milliseconds`;
 }
 
-// Function that updates the progress bar
-function updateBar(barId, percent) {
-    const bar = document.getElementById(barId);
-    bar.style.width = `${percent}%`;
-  }
-
-// Function to hide the progress bar
-function hideProgressBar() {
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.display = 'none';
-}
-
-// Function to show the progress bar
-function showProgressBar() {
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.display = 'block';
-}
-
-// Function to update the comparsion bars
-function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes) {
-    const ctx = document.getElementById('racingGraph').getContext('2d');
-  
-    if (racingChart) {
-      racingChart.destroy();  // Destroy the previous chart if exists
-    }
-  
-    racingChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: Array.from({ length: iterations }, (_, i) => i + 1),
-        datasets: [
-            {
-              label: 'js',
-              data: jsTimes,
-              borderColor: 'rgba(255, 99, 132, 1)',
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderWidth: 2,
-              pointRadius: 3,
-              pointHoverRadius: 5,
-              fill: false
-            },
-            {
-              label: 'wasm',
-              data: wasmTimes,
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              borderWidth: 2,
-              pointRadius: 3,
-              pointHoverRadius: 5,
-              fill: false
-            },
-            {
-              label: 'naive',
-              data: naiveTimes,
-              borderColor: 'rgba(255, 205, 86, 1)',
-              backgroundColor: 'rgba(255, 205, 86, 0.2)',
-              borderWidth: 2,
-              pointRadius: 3,
-              pointHoverRadius: 5,
-              fill: false
-            }
-          ]
-        },
-      options: {
-        scales: {
-            x: {
-                grid: {
-                  display: false
-                },
-                title: {
-                  display: true,
-                  text: 'Iteration',
-                  font: {
-                    size: 16,
-                    weight: 'bold'
-                  }
-                }
-              },
-          y: {
-            beginAtZero: true,
-            grid: {
-                display: false
-            },
-            title: {
-              display: true,
-              text: 'Time (ms)'
-            }
-          }
-        }
-      }
-    });
-
+// Function to update the stats table
+function updateStatsTable(jsTimes, wasmTimes, naiveTimes) {
     // Update the table with average, min, and max values
     const tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = '';
@@ -190,6 +98,10 @@ function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes) {
     const naiveMin = Math.min(...naiveTimes);
     const naiveMax = Math.max(...naiveTimes);
     const naiveAvg = naiveTimes.reduce((a, b) => a + b, 0) / naiveTimes.length;
+
+    console.log(jsMin, jsMax, jsAvg, "js");
+    console.log(wasmMin, wasmMax, wasmAvg, "wasm");
+    console.log(naiveMin, naiveMax, naiveAvg, "naive");
 
     const minRow = document.createElement('tr');
     minRow.innerHTML = `
@@ -219,25 +131,126 @@ function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes) {
     tableBody.appendChild(avgRow);
 }
 
+// Function to update racing graph
+function updateRacingGraph(iterations, jsTimes, wasmTimes, naiveTimes) {
+    const ctx = document.getElementById('racingGraph').getContext('2d');
+
+    if (racingChart) {
+        racingChart.data.labels = Array.from({ length: iterations }, (_, i) => i + 1);
+        racingChart.data.datasets[0].data = jsTimes;
+        racingChart.data.datasets[1].data = wasmTimes;
+        racingChart.data.datasets[2].data = naiveTimes;
+        racingChart.update();  // Update the existing chart with new data
+        return;
+    }
+  
+    racingChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Array.from({ length: iterations }, (_, i) => i + 1),
+        datasets: [
+            {
+              label: 'js',
+              data: jsTimes,
+              borderColor: '#559fae',
+              backgroundColor: '#FAFCFD',
+              borderWidth: 3,
+              pointRadius: 0,
+              pointHoverRadius: 10,
+              fill: false
+            },
+            {
+              label: 'wasm',
+              data: wasmTimes,
+              borderColor: '#87a6db',
+              backgroundColor: '#FAFCFD',
+              borderWidth: 3,
+              pointRadius: 0,
+              pointHoverRadius: 10,
+              fill: false
+            },
+            {
+              label: 'naive',
+              data: naiveTimes,
+              borderColor: '#dd6a44',
+              backgroundColor: '#FAFCFD',
+              borderWidth: 3,
+              pointRadius: 0,
+              pointHoverRadius: 10,
+              fill: false
+            }
+          ]
+        },
+      options: {
+        animation: {
+            duration: 0, // Duration of the animation in milliseconds
+        },
+        scales: {
+            x: {
+                grid: {
+                  display: false
+                },
+                title: {
+                  display: false,
+                  text: 'Iteration',
+                  font: {
+                    size: 16,
+                    weight: 'bold',
+                    color: 'red'
+                  }
+                }
+              },
+          y: {
+            beginAtZero: true,
+            grid: {
+                display: false
+            },
+            ticks: {
+                font: {
+                    size: 20,
+                    color: 'red'
+                }
+              },
+            title: {
+              display: true,
+              text: 'Milliseconds'
+            }
+          }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 20
+                    }
+                }
+            }
+        }
+      }
+    });
+}
+
 // Function to handle method comparison
 const handleMethodComparison = async () => {
-    updateBar('progressBar', 0);
-    showProgressBar();
 
     const updateInterval = 1;
     const iterations = document.getElementById('iterationsInput').value;
-    // const updateInterval = document.getElementById('updateRateInput').value;
     const number = BigInt(document.getElementById('iterationsNumberInput').value);
+    
+    const result = await naiveFactorization(number);
+        
+    // Add each factor as a new <p> tag
+    result.forEach(factor => {
+        const p = document.createElement('p');
+        p.innerText = factor;
+        p.classList.add('tag-number');
+    });
+
     const wasmTimes = [];
     const jsTimes = [];
     const naiveTimes = [];
-    // document.getElementById('loading').innerText = `Loading... ${0} / ${iterations}`;
     
     for (let i = 0; i < iterations; i++) {
-        // document.getElementById('loading').innerText = `Loading... ${i} / ${iterations}`;
-        updateBar('progressBar', (i / iterations) * 100);
-        
-
         const startTime = new Date().getTime();
         await cFactorize(number);
         const endTime = new Date().getTime();
@@ -254,18 +267,10 @@ const handleMethodComparison = async () => {
         naiveTimes.push(endTime3 - startTime3);
 
         if (i % updateInterval === 0) {
-            const wasmAverage = wasmTimes.reduce((a, b) => a + b, 0) / wasmTimes.length;
-            const jsAverage = jsTimes.reduce((a, b) => a + b, 0) / jsTimes.length;
-            const naiveAverage = naiveTimes.reduce((a, b) => a + b, 0) / naiveTimes.length;
             updateRacingGraph(i, jsTimes, wasmTimes, naiveTimes);
-    
-            // document.getElementById('js').innerText = `JS average time: ${jsAverage.toFixed(3)} milliseconds`;
-            // document.getElementById('wasm').innerText = `WASM average time: ${wasmAverage.toFixed(3)} milliseconds`;
-            // document.getElementById('naive').innerText = `Naive JS average time: ${naiveAverage.toFixed(3)} milliseconds`;
+            updateStatsTable(jsTimes, wasmTimes, naiveTimes);
         }
     }
-
-    hideProgressBar();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
