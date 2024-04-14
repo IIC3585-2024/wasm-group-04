@@ -218,6 +218,11 @@ button {
   width: 6rem;
 }
 
+.go-btn[disabled] {
+  opacity: 0.6; /* Reduced opacity for the disabled button */
+  cursor: not-allowed; /* Change cursor to 'not-allowed' when disabled */
+}
+
 .random-input-container {
   background-color: var(--white);
   border-radius: 4rem;

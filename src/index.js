@@ -28,7 +28,7 @@ const generateRandomNumbers = () => {
     const input = document.getElementById('numberInput');
   
     const interval = setInterval(() => {
-        const randomNumber = Math.random() * 18446744073709551615; // Generates a random number between 0 and 18446744073709551615
+        const randomNumber = Math.floor(Math.random() * 18446744073709551615); // Generates a random number between 0 and 18446744073709551615
         input.value = randomNumber;
     }, 50); // Interval of 50 milliseconds to generate new random numbers
     
@@ -40,6 +40,10 @@ const generateRandomNumbers = () => {
 
 // Function to handle factorization
 const handleFactorization = async () => {
+    const button = document.getElementById('factorizeButton');
+    button.disabled = true;
+    button.innerHTML = '...';
+
     const max64Bit = (2n ** 64n) - 1n;
 
     const number = BigInt(document.getElementById('numberInput').value);
@@ -51,19 +55,27 @@ const handleFactorization = async () => {
         return;
     }
 
-    switch (selectedMethod) {
-        case 'wasm':
-            result = await cFactorize(number);
-            break;
-        case 'js':
-            result = await factorize(number);
-            break;
-        case 'naive':
-            result = await naiveFactorization(number);
-            break;
-        default:
-            console.error('Invalid method selected');
-            return;
+    try {
+        switch (selectedMethod) {
+            case 'wasm':
+                result = await cFactorize(number);
+                break;
+            case 'js':
+                result = await factorize(number);
+                break;
+            case 'naive':
+                result = await naiveFactorization(number);
+                break;
+            default:
+                throw new Error('Invalid method selected');
+        }
+    } catch (error) {
+        console.error('Error:', error.message);
+        return;
+    } finally {
+        // Enable the button
+        button.disabled = false;
+        button.innerHTML = 'go';
     }
 
     const endTime = new Date().getTime();
