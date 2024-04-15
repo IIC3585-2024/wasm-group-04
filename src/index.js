@@ -29,7 +29,7 @@ const generateRandomNumbers = () => {
     const input = document.getElementById('numberInput');
   
     const interval = setInterval(() => {
-        const randomNumber = Math.floor(Math.random() * 18446744073709551615); // Generates a random number between 0 and 18446744073709551615
+        const randomNumber = Math.floor(Math.random() * 1844674407313); // Generates a random number between 0 and 18446744073709551615
         input.value = randomNumber;
     }, 50); // Interval of 50 milliseconds to generate new random numbers
     
