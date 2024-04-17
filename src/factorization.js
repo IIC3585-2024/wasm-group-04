@@ -16,20 +16,8 @@ export async function cFactorize(n) {
     let factor = await pollardRho(n, 1n);
 
     // Execute primality test for the factor
-    if (_fast_is_prime(factor, 4n)) {
-      factors.push(factor);
-      n /= factor;
-      continue;
-    }
-
-    // Execute Pollard Rho with retries
-    let retries = 0n;
-    while (factor === n) {
-      factor = await _fast_pollard_rho(n, retries + 1n);
-      retries++;
-      if (retries > 100) {
-        break;
-      }
+    if (!_fast_is_prime(factor, 4n)) {
+      factor = await pollardRho(n, 2n);
     }
 
     factors.push(factor);
@@ -37,6 +25,7 @@ export async function cFactorize(n) {
   }
   return factors;
 }
+
 
 // extracted from https://www.geeksforgeeks.org/primality-test-set-3-miller-rabin/
 // Javascript program Miller-Rabin primality test
@@ -130,21 +119,8 @@ export async function factorize(n) {
     let factor = await pollardRho(n, 1n);
 
     // Execute primality test for the factor
-    if (isPrime(factor, 4)) {
-      factors.push(factor);
-      n /= factor;
-      continue;
-    }
-
-    console.log("factor", factor, "n", n);
-    let retries = 0n;
-    while (factor === n) {
-      console.log("retries", retries);
-      factor = await pollardRho(n, retries + 1n);
-      retries++;
-      if (retries > 100) {
-        break;
-      }
+    if (!isPrime(factor, 4)) {
+      factor = await pollardRho(n, 2n);
     }
 
     factors.push(factor);
